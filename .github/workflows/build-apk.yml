@@ -22,8 +22,12 @@ jobs:
     - name: Set up Gradle
       uses: gradle/actions/setup-gradle@v3
 
+    - name: Inject API Key into Local Properties
+      run: |
+        echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> local.properties
+
     - name: Build Debug APK with Gradle
-      run: gradle assembleDebug --stacktrace
+      run: gradle assembleDebug --stacktrace 
 
     - name: Upload Debug APK Artifact
       uses: actions/upload-artifact@v4
